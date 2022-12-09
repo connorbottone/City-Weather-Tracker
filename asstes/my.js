@@ -1,26 +1,41 @@
+var mainTemp = document.querySelector('.temperature')
+var mainSky = document.querySelector(".summaryText")
+var mainWind= document.querySelector(".wind")
+var searched=[]
 
+function Displaytext(){
+  v= fetchpost()
+}
 
-
-// const weatherApi = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=9ae65e07b51d7c7d559b20d779c9b073&units=metric'
-//     const response = await fetch(weatherApi);
-//     const data = await response.json();
-    var searched=[""]
-        var getLocalWeather= function(){ 
-            var cityaa = $(this).attr('value');
-            var CityApi = `https://api.openweathermap.org/data/2.5/forecast?q=${cityaa}&appid=9ae65e07b51d7c7d559b20d779c9b073&units=metric`;
+        var getLocalWeather= function(x){ 
+            // var cityaa = $(this).attr('value');
+            var CityApi = `https://api.openweathermap.org/data/2.5/forecast?q=${x}&appid=9ae65e07b51d7c7d559b20d779c9b073&units=metric`;
           fetch(CityApi)
           .then(function (response) {
                 if (response.ok) {
                   console.log(response);
                   response.json().then(function (data) {
+
+                  var  wind = data.list[0].wind.speed
+                  mainWind.innerHTML= `Wind:${wind}MPH`
+
+                  
                     console.log(data);
+                
+                for (let i = 0; i <5; i++) {
+                  var temp = document.querySelector(`.temp${i+1}`)
+                  console.log(i*8)
+                  temp.textContent= data.list[i*8].main.temp;
+                  
+                }
                   });
                 }
             })
         };
         function renderButtons() {
 
-    
+          
+          $("#Append").html("")
             
             for (var i = 0; i < searched.length; i++) {
         
@@ -43,7 +58,7 @@
     localStorage.setItem('City', $("#city").val());
    var x = document.querySelector("#city").value
    searched.push(x)
-   
+   getLocalWeather(x)
    renderButtons()
    console.log(searched)
 })

@@ -84,6 +84,7 @@ img{
 
 
 
+
 .spin img{
   animation: spin 5s linear infinite;
   animation-play-state: paused;
@@ -159,7 +160,7 @@ body {
   margin-left: 56px;
 }
 
-.precipitation,
+.humidity,
 .wind {
   color: #d2e9fa;
   font-size: 1.6em;
