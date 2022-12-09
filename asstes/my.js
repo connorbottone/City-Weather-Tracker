@@ -9,25 +9,34 @@ function Displaytext(){
 
         var getLocalWeather= function(x){ 
             // var cityaa = $(this).attr('value');
-            var CityApi = `https://api.openweathermap.org/data/2.5/forecast?q=${x}&appid=9ae65e07b51d7c7d559b20d779c9b073&units=metric`;
+            var CityApi = `https://api.openweathermap.org/data/2.5/forecast?q=${x}&appid=9ae65e07b51d7c7d559b20d779c9b073&units=imperial`;
           fetch(CityApi)
           .then(function (response) {
                 if (response.ok) {
                   console.log(response);
                   response.json().then(function (data) {
 
-                  var  wind = data.list[0].wind.speed
-                  mainWind.innerHTML= `Wind:${wind}MPH`
+                  var  cityEl = document.querySelector(".searchedCity")
+                 cityEl.textContent= data.city.name
 
                   
                     console.log(data);
                 
-                for (let i = 0; i <5; i++) {
-                  var temp = document.querySelector(`.temp${i+1}`)
-                  console.log(i*8)
-                  temp.textContent= data.list[i*8].main.temp;
+                for (let i = 0; i <6; i++) {
+                  var temp = document.querySelector(`.temp${i+1}`);
+                  temp.textContent= `${data.list[i*7].main.temp}\u00B0`
                   
-                }
+                  var humidityEl = document.querySelector(`.humidity${i+1}`);
+                  humidityEl.textContent= `${data.list[i*7].main.humidity} Humidity`
+                   var windEl = document.querySelector(`.wind${i+1}`);
+                   windEl.textContent= `${data.list[i*7].wind.speed} Mph`
+                   var dateEl = document.querySelector(`.date${i+1}`);
+                   dateEl.textContent= data.list[i*7].dt_txt                   
+                  //  var icon=document.querySelector(`.img${i+1}`)
+                    var icon = data.list[i*7.].weather[0].icon
+                    var imgurl="http://openweathermap.org/img/w/" + icon + ".png";
+                    $(`.img${i+1}`).attr('src',imgurl);
+                  }
                   });
                 }
             })
