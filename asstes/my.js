@@ -3,6 +3,7 @@ var mainSky = document.querySelector(".summaryText")
 var mainWind= document.querySelector(".wind")
 var searched=[]
 var appendEl = document.querySelector("#Append")
+// var headtextEl = document.querySelector(".headtext")
 
 function Displaytext(){
   v= fetchpost()
@@ -16,9 +17,10 @@ function Displaytext(){
                 if (response.ok) {
                   console.log(response);
                   response.json().then(function (data) {
-
+                    headtextEl = document.querySelector(".headtext")
                   var  cityEl = document.querySelector(".searchedCity")
                  cityEl.textContent= data.city.name
+                 headtextEl.textContent= ""
 
                   
                     console.log(data);
