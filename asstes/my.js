@@ -2,6 +2,7 @@ var mainTemp = document.querySelector('.temperature')
 var mainSky = document.querySelector(".summaryText")
 var mainWind= document.querySelector(".wind")
 var searched=[]
+var appendEl = document.querySelector("#Append")
 
 function Displaytext(){
   v= fetchpost()
@@ -50,7 +51,7 @@ function Displaytext(){
         
                 // dynamicaly generate buttons for each city in our array
                 // $('#Append').empty()
-                var a = $("<button>")
+                var a = $("<li>")
                 // adding a class of movie-btn to the button
                 a.addClass("SearchedCities");
                 // add a data-attribute
@@ -58,9 +59,25 @@ function Displaytext(){
                 // providint text for the button
                 a.text(searched[i]);
                 // adding the button to the BUTTONS-VIIW DIV
+               
                 $("#Append").append(a);
+                
+                
             }
-        }
+
+            
+          }
+          function load() {
+              var storedSearches = JSON.parse(localStorage.getItem("searched"))
+              if (storedSearches !== null) {
+                searched = storedSearches
+              }
+              renderButtons()
+            }
+          function storesearches() {
+            localStorage.setItem("searched", JSON.stringify(searched))
+            
+          }
 
 
         $('#btn1').on("click", function () {
@@ -68,9 +85,23 @@ function Displaytext(){
    var x = document.querySelector("#city").value
    searched.push(x)
    getLocalWeather(x)
+   storesearches()
    renderButtons()
    console.log(searched)
 })
+$(document).on('click', '.SearchedCities', storedcity)
+function storedcity() {
+  for (let i = 0; i < searched.length; i++) {
+    var value = ($(this).attr('data-name'))
+    console.log
+    getLocalWeather(value)
+    
+  }
+
+
+  
+}
+load()
 // function listSearchedCity() {
     
 // var repoEl = document.createElement('p');
