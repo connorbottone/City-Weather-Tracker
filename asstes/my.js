@@ -17,10 +17,10 @@ function Displaytext(){
                 if (response.ok) {
                   console.log(response);
                   response.json().then(function (data) {
-                    headtextEl = document.querySelector(".headtext")
+                    headtextEl = document.querySelector(".headText")
                   var  cityEl = document.querySelector(".searchedCity")
                  cityEl.textContent= data.city.name
-                 headtextEl.textContent= ""
+                 headtextEl.textContent= data.list[0].main.temp + "\u00B0"
 
                   
                     console.log(data);
