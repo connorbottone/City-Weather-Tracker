@@ -1,5 +1,5 @@
 ## Description
- <!-- [linbk] -->
+ [https://connorbottone.github.io/City-Weather-Tracker/]
  ![Deployed Webpage](/asstes/images/weather.PNG)
 
 - Animated icons upon hover for 5 day forecast. 
@@ -80,7 +80,7 @@
  - Store all searched cities as clickable item that then redisplays that citys forecast.
 
  - Text area to input city name and search button to display that cities local weather.
-
+- On mobile view the 5 day foecast is fixed to the bottom of the screen user can scroll to see full present day info.
  
 ## Author
 (email at : connorbottone@gmail.com)
